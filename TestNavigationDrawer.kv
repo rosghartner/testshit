@@ -1,0 +1,69 @@
+Screen:
+    MDToolbar:
+        id: toolbar
+        pos_hint: {"top": 1}
+        title: "Navigation Drawer"
+        elevation: 10
+        left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
+
+    NavigationLayout:
+
+        ScreenManager:
+            id: screen_manager
+
+            Screen:
+                name: "scr 1"
+
+                BoxLayout:
+                    orientation: 'vertical'
+
+                    BoxLayout:
+                        orientation: "vertical"
+                        padding: 50
+                        MDLabel:
+                            text: ""
+                            halign: "center"
+                        MDTextField:
+                            hint_text: "Login"
+                            mode: "rectangle"
+                        MDTextField:
+                            hint_text: "Password"
+                            mode: "rectangle"
+                            password: True
+                        AnchorLayout:
+                            MDRaisedButton:
+                                text: "login"
+                        MDLabel:
+                            text: ""
+                            halign: "center"  
+            Screen:
+                name: "scr 2"
+
+                MDLabel:
+                    text: "Screen 2"
+                    halign: "center"  
+
+
+        MDNavigationDrawer:
+            id: nav_drawer
+
+            ContentNavigationDrawer:
+                screen_manager: screen_manager
+                nav_drawer: nav_drawer
+
+<ContentNavigationDrawer>:
+
+    ScrollView:
+
+        MDList:
+
+            OneLineListItem:
+                text: "Login Form"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "scr 1"
+            OneLineListItem:
+                text: "Screen 2"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "scr 2"
